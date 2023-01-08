@@ -4,23 +4,25 @@ Descargar y descomprimir Kafka de la URL https://kafka.apache.org/. Este es todo
 
 A partir de aquí hemos arrancado primero Zookeeper y después Kafka:
 
-<KAFKA_HOME>/bin/zookeeper-server-start.sh config/zookeeper.properties
+	<KAFKA_HOME>/bin/zookeeper-server-start.sh config/zookeeper.properties
 
-<KAFKA_HOME>/bin/kafka-server-start.sh config/server.properties
+	<KAFKA_HOME>/bin/kafka-server-start.sh config/server.properties
 
-Creamos nuestros dos topic
-Ahora toca crear nuestros dos topics(Uno de entrada y otro de salida):
+Creamos nuestros los topic:
 
 	<KAFKA_HOME>/bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test-stream-in
 
 	<KAFKA_HOME>/bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test-stream-out
+	
 Después hemos comprobado que realmente ambos topics se han generado correctamente:
 
 	<KAFKA_HOME>/bin/kafka-topics.sh --list --bootstrap-server localhost:9092
+	
 Nos conectamos al topic de entrada y nos suscribimos al de salida
 	<KAFKA_HOME>/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test-stream-in
 
 	<KAFKA_HOME>/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test-stream-out --from-beginning
+	
 Recordad que de momento estos dos topics(O listas) no están conectadas porque todaví­a no tenemos la aplicación que lo hace.
 
 Arrancamos nuesto IDE favorito creamos nuestro proyecto maven
@@ -76,5 +78,5 @@ public class StreamsDemo {
 		}	
 	
 	}
-Como veis el desarrollo es bien sencillo y ha habido mas trabajo de arrancar cosas que de programación.
+
 
